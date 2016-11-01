@@ -9,6 +9,7 @@ public class StoreBackroom {
 	
 	public StoreBackroom (HashMap<Long,int[]> inventory) {
 		this.inventory = inventory;
+		this.orders = new HashMap<Long,Integer>();
 	}
 	public void add (ItemType type, int quantity) {
 		if (this.inventory.containsKey(type.getID())) {
@@ -20,7 +21,11 @@ public class StoreBackroom {
 	}
 	public void remove (ItemType type, int quantity) {
 		this.inventory.get(type.getID())[0] -= quantity;
-		//check levels
+		if (this.inventory.get(type.getID())[0] < this.inventory.get(type.getID())[1]) {
+			if (!this.orders.containsKey(type.getID())) {
+				this.orders.put(type.getID(), this.inventory.get(type.getID())[1]);
+			}
+		}
 	}
 	public void setMinimumThreshold (ItemType type, int quantity) {
 		this.inventory.get(type.getID())[1] = quantity;
@@ -35,5 +40,8 @@ public class StoreBackroom {
 	}
 	public void removeFromOrder (ItemType type, int quantity) {
 		this.orders.put(type.getID(), this.orders.get(type.getID()).intValue()-quantity);
+	}
+	public Map<Long,Integer> getNightlyOrder () {
+		return this.orders;
 	}
 }
