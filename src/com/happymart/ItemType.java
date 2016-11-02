@@ -50,5 +50,7 @@ public class ItemType {
 	public void setPricePerUnitInUSCents(int pricePerUnitInUSCents) {
 		this.pricePerUnitInUSCents = pricePerUnitInUSCents;
 	}
-	
+	public String toString() {
+		return this.unitName + " of " + this.originalManufacturerOrSupplierName + " " + this.name + " (" + this.id + ")";
+	}
 }
