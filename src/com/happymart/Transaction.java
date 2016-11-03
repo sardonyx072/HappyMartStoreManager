@@ -1,12 +1,13 @@
 package com.happymart;
 
-import java.util.Date;
 import java.util.Map;
 
-public class Transaction {
+public class Transaction extends Activity {
 	private static long uniqueIDs = 0;
 	private long id;
-	private long[] referencedIDs;
+	private long[] referencedTransactionIDs;
+	private String storeInfo;
+	private long registerID;
 	private String employee;
 	private Map <ItemType,Integer> purchasedItems;
 	private int purchasedSubtotal;
@@ -15,11 +16,13 @@ public class Transaction {
 	private int total;
 	private PaymentType paymentType;
 	private String paymentString;
-	private Date timestamp;
 	
-	public Transaction (long[] referencedIDs, String employee, Map<ItemType,Integer> purchasedItems, Map<ItemType,Integer> returnedItems, PaymentType type, String paymentString) {
-		this.id = this.uniqueIDs++;
-		this.referencedIDs = referencedIDs;
+	public Transaction (long[] referencedIDs, String storeInfo, long registerID, String employee, Map<ItemType,Integer> purchasedItems, Map<ItemType,Integer> returnedItems, PaymentType type, String paymentString) {
+		super(ActivityType.Transaction,"Transaction");
+		this.id = uniqueIDs++;
+		this.referencedTransactionIDs = referencedIDs;
+		this.storeInfo = storeInfo;
+		this.registerID = registerID;
 		this.employee = employee;
 		this.purchasedItems = purchasedItems;
 		this.purchasedSubtotal = 0;
@@ -33,13 +36,18 @@ public class Transaction {
 		this.total = this.purchasedSubtotal - this.returnedSubtotal;
 		this.paymentType = type;
 		this.paymentString = paymentString;
-		this.timestamp = new Date();
 	}
 	public long getID() {
 		return this.id;
 	}
-	public long[] getReferencedIDs() {
-		return this.referencedIDs;
+	public long[] getReferencedTransactionIDs() {
+		return this.referencedTransactionIDs;
+	}
+	public String getStoreInfo() {
+		return this.storeInfo;
+	}
+	public long getRegisterID() {
+		return this.registerID;
 	}
 	public String getEmployee() {
 		return this.employee;
@@ -65,18 +73,19 @@ public class Transaction {
 	public String getPaymentString() {
 		return this.paymentString;
 	}
-	public Date getDateTimestamp() {
-		return this.timestamp;
-	}
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Transaction completed: " + this.getDateTimestamp());
 		builder.append('\n');
+		builder.append(" " + this.getStoreInfo());
+		builder.append('\n');
+		builder.append(" " + this.getRegisterID());
+		builder.append('\n');
 		builder.append(" Cashier: " + this.employee);
 		builder.append('\n');
-		if (this.getReferencedIDs().length > 0) {
+		if (this.getReferencedTransactionIDs().length > 0) {
 			builder.append(" Referenced receipt numbers:");
-			for (long x : this.getReferencedIDs()) {
+			for (long x : this.getReferencedTransactionIDs()) {
 				builder.append('\n');
 				builder.append(x);
 			}

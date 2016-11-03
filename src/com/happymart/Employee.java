@@ -1,7 +1,7 @@
 package com.happymart;
 
 public class Employee {
-	private static long uniqueIDs;
+	private static long uniqueIDs = 0;
 	private long id;
 	private String firstName;
 	private String middleName;

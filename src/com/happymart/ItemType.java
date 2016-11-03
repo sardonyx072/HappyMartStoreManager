@@ -1,7 +1,7 @@
 package com.happymart;
 
 public class ItemType {
-	private static long uniqueItems;
+	private static long uniqueIDs = 0;
 	private long id;
 	private String name;
 	private String unitName;
@@ -10,7 +10,7 @@ public class ItemType {
 	private int pricePerUnitInUSCents;
 	
 	public ItemType (String name, String unitName, String originalManufacturerOrSupplierName, String description, int pricePerUnitInUSCents) {
-		this.id = uniqueItems++;
+		this.id = uniqueIDs++;
 		this.name = name;
 		this.unitName = unitName;
 		this.originalManufacturerOrSupplierName = originalManufacturerOrSupplierName;
