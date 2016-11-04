@@ -1,6 +1,7 @@
 package com.happymart;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,8 +41,8 @@ public class Store implements Serializable {
 	public Employee getEmployee (long id) {
 		return this.employees.get(id);
 	}
-	public Employee[] getEmployees () {
-		return (Employee[])this.employees.values().toArray();
+	public Collection<Employee> getEmployees () {
+		return this.employees.values();
 	}
 	public String toString() {
 		return this.getStoreInfo();
