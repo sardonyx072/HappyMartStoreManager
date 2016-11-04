@@ -1,6 +1,8 @@
 package com.happymart;
 
-public enum MessageType {
+import java.io.Serializable;
+
+public enum MessageType implements Serializable {
 	Ping, //String(test string)
 	CheckCredentials, //String(user::pass)
 	OpenSession, //String(employee name)

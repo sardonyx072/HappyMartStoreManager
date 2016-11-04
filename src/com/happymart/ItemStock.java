@@ -1,6 +1,8 @@
 package com.happymart;
 
-public class ItemStock {
+import java.io.Serializable;
+
+public class ItemStock implements Serializable {
 	private ItemType type;
 	private int quantity;
 	private int minimumQuantity;

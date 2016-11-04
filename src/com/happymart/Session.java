@@ -1,9 +1,10 @@
 package com.happymart;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
 
-public class Session {
+public class Session implements Serializable {
 	private static long uniqueIDs = 0;
 	private long id;
 	private Date sessionOpenTimestamp;

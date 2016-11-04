@@ -69,9 +69,10 @@ public class StoreTerminal implements Runnable {
 			String pass = scan.nextLine();
 			Message<?> message = this.sendCommand(new Message<String>(MessageType.CheckCredentials,user+"::"+pass));
 			if (message.getType() == MessageType.OkResponse) {
+				found = true;
+				lockoutCounter = 0;
 				this.openSession = new Session(this.storeInfo.getID(),this.id,user);
 				this.sendCommand(new Message<Session>(MessageType.OpenSession,this.openSession));
-				lockoutCounter = 0;
 			}
 			else {
 				lockoutCounter++;

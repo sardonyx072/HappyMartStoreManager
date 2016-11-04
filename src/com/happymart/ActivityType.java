@@ -1,6 +1,8 @@
 package com.happymart;
 
-public enum ActivityType {
+import java.io.Serializable;
+
+public enum ActivityType implements Serializable {
 	UpdateStoreInfo,
 	Transaction,
 	ManageRegister;

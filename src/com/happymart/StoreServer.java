@@ -23,6 +23,7 @@ public class StoreServer implements Runnable {
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileSystemPath+"\\back.hmsb"));
 			this.backroom = (StoreBackroom)inStream.readObject();
+			this.backroom.add(new ItemType("Book","book","Pelican Books","",1999), 16);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -107,7 +108,6 @@ public class StoreServer implements Runnable {
 		try {
 			ServerSocket server = new ServerSocket(9874);
 			server.getReuseAddress();
-			System.out.println(server.getInetAddress() + ":" + server.getLocalPort());
 			while (true) {
 				Socket connection = server.accept();
 				ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());

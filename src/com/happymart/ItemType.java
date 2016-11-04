@@ -1,6 +1,8 @@
 package com.happymart;
 
-public class ItemType {
+import java.io.Serializable;
+
+public class ItemType implements Serializable {
 	private static long uniqueIDs = 0;
 	private long id;
 	private String name;

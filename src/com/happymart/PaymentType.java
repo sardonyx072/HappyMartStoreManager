@@ -1,6 +1,8 @@
 package com.happymart;
 
-public enum PaymentType {
+import java.io.Serializable;
+
+public enum PaymentType implements Serializable {
 	Cash,
 	Credit,
 	Debit,
