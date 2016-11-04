@@ -1,6 +1,8 @@
 package com.happymart;
 
 public enum MessageType {
+	Ping, //String(test string)
+	CheckCredentials, //String(user::pass)
 	OpenSession, //String(employee name)
 	GetItemQuantity, //Long(id)
 	GetInventory, //String(search)

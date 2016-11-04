@@ -1,10 +1,11 @@
 package com.happymart;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class StoreBackroom {
+public class StoreBackroom implements Serializable {
 	private Map<Long,ItemStock> inventory;
 	private Map<Long,Integer> orders;
 	

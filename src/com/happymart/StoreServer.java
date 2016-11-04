@@ -1,6 +1,8 @@
 package com.happymart;
 
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,30 +20,34 @@ public class StoreServer implements Runnable {
 	
 	public StoreServer (Store storeInfo) {
 		this.storeInfo = storeInfo;
-		//load store from file by storeID and build backroom
-		//display own local ip
-		openSessions = new HashMap<Long,Session>();
-	}
-	
-	public void run () {
 		try {
-			ServerSocket server = new ServerSocket(9876);
-			while (true) {
-				Socket connection = server.accept();
-				ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());
-				ObjectOutputStream outStream = new ObjectOutputStream(connection.getOutputStream());
-				outStream.writeObject(this.handle((Message<?>)inStream.readObject()));
-			}
-		}
-		catch (IOException e) {
+			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileSystemPath+"\\storeback.hmsb"));
+			this.backroom = (StoreBackroom)inStream.readObject();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		openSessions = new HashMap<Long,Session>();
+		System.out.println("Awaiting connections...");
 	}
+	
 	@SuppressWarnings("unchecked")
-	public Message<?> handle(Message<?> message) {
+	private Message<?> handle(Message<?> message) {
 		switch (message.getType()) {
+		case Ping:
+			return new Message<String>(MessageType.OkResponse,new String("Hello, and welcome to Happy Mart!"));
+		case CheckCredentials:
+			String raw = (String)message.getMessage();
+			String username = raw.substring(0, raw.indexOf("::")), password = raw.substring(raw.indexOf("::")+2);
+			for (Employee employee : this.storeInfo.getEmployees()) {
+				if (employee.getUsername().equals(username) && employee.getPassword().equals(password)) {
+					return new Message<Long>(MessageType.OkResponse,employee.getId());
+				}
+			}
+			return new Message<String>(MessageType.FailResponse,new String("Username or password incorrect"));
 		case OpenSession:
 			this.openSessions.put(((Session)message.getMessage()).getID(), (Session)message.getMessage());
 			return new Message<String>(MessageType.OkResponse,new String("Success"));
@@ -54,7 +60,6 @@ public class StoreServer implements Runnable {
 				writer.close();
 				this.openSessions.remove(id);
 			} catch (IOException e) {
-				//e.printStackTrace();
 				return new Message<String>(MessageType.FailResponse,new String("Failure to write session to file"));
 			}
 			return new Message<String>(MessageType.OkResponse,new String("Success"));
@@ -94,6 +99,24 @@ public class StoreServer implements Runnable {
 			return new Message<String>(MessageType.FailResponse,new String("Failure to recognize message"));
 		default:
 			return new Message<String>(MessageType.FailResponse,new String("Failure to recognize message"));
+		}
+	}
+	
+	@Override
+	public void run () {
+		try {
+			ServerSocket server = new ServerSocket(9876);
+			while (true) {
+				Socket connection = server.accept();
+				ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());
+				ObjectOutputStream outStream = new ObjectOutputStream(connection.getOutputStream());
+				outStream.writeObject(this.handle((Message<?>)inStream.readObject()));
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 }

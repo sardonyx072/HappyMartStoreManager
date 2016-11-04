@@ -1,6 +1,8 @@
 package com.happymart;
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
 	private static long uniqueIDs = 0;
 	private long id;
 	private String firstName;
@@ -14,7 +16,7 @@ public class Employee {
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;
-		this.username = lastName.substring(0, 4) + this.id;
+		this.username = lastName.substring(0, Math.min(4, lastName.length())) + this.id;
 		this.password = "password";
 	}
     public Employee(String firstName, String lastName){
