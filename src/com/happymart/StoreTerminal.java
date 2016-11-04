@@ -22,8 +22,12 @@ public class StoreTerminal {
 				inBuilder.append('\n' + inStream.readLine());
 			}
 			String inMessage = inBuilder.toString();
-			MessageType type = MessageType.valueOf(MessageType.class, inMessage.substring(0,inMessage.indexOf(':')));
-			String contents = inMessage.substring(inMessage.indexOf(':')+1);
+			MessageType type = MessageType.valueOf(inMessage);
+			String contents = "";
+			if (inMessage.indexOf('\n') != -1) {
+				type = MessageType.valueOf(MessageType.class, inMessage.substring(0,inMessage.indexOf('\n')));
+				contents = inMessage.substring(inMessage.indexOf('\n')+1);
+			}
 			response = new Message(type,contents);
 		}
 		catch (IOException e) {

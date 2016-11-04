@@ -21,6 +21,14 @@ public class StoreBackroom {
 		}
 		return itemTypeAndQuantityList;
 	}
+	public int checkQuantityOf (ItemType type) {
+		if (this.inventory.containsKey(type.getID())) {
+			return this.inventory.get(type).getQuantity();
+		}
+		else {
+			return 0;
+		}
+	}
 	public void add (ItemType type, int quantity) {
 		if (this.inventory.containsKey(type.getID())) {
 			this.inventory.get(type.getID()).addQuantity(quantity);

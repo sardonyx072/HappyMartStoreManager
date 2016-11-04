@@ -1,20 +1,20 @@
 package com.happymart;
 
-public class Message {
+public class Message<T> {
 	private MessageType type;
-	private String contents;
+	private T content;
 	
-	public Message (MessageType type, String contents) {
+	public Message (MessageType type, T content) {
 		this.type = type;
-		this.contents = contents;
+		this.content = content;
 	}
 	public MessageType getType() {
 		return this.type;
 	}
-	public String getMessage () {
-		return this.contents;
+	public T getMessage () {
+		return this.content;
 	}
 	public String toString() {
-		return this.type + ":" + this.contents;
+		return this.type + "\n" + this.content;
 	}
 }

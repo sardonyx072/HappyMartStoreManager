@@ -1,8 +1,9 @@
 package com.happymart;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public abstract class Activity {
+public abstract class Activity implements Serializable {
 	private ActivityType type;
 	private String description;
 	protected Date timestamp;
