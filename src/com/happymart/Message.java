@@ -1,6 +1,8 @@
 package com.happymart;
 
-public class Message<T> {
+import java.io.Serializable;
+
+public class Message<T> implements Serializable {
 	private MessageType type;
 	private T content;
 	

@@ -26,17 +26,18 @@ public class HappyMartStoreManager {
 				System.out.println("Enter server IP or press [Enter] to start server: ");
 				String inIP = scan.nextLine();
 				if (inIP.length() == 0) {
-					new Thread(new StoreServer(storeInfo)).start();
 					validIPEntered = true;
+					new Thread(new StoreServer(storeInfo)).start();
 				}
 				else {
 					try {
-						Socket connection = new Socket(inIP,9876);
+						Socket connection = new Socket(inIP,9874);
 						ObjectOutputStream outStream = new ObjectOutputStream(connection.getOutputStream());
 						ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());
 						outStream.writeObject(new Message<String>(MessageType.Ping,"Hello"));
 						Message<?> response = (Message<?>)inStream.readObject();
 						if (response.getType() == MessageType.OkResponse) {
+							validIPEntered = true;
 							boolean validAnswer = false;
 							while (!validAnswer) {
 								System.out.println("Terminal(0) or Register(1)?");

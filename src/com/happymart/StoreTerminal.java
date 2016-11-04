@@ -32,7 +32,7 @@ public class StoreTerminal implements Runnable {
 	}
 	protected Message<?> sendCommand (Message<?> message) {
 		try {
-			Socket connection = new Socket(serverIP,9876);
+			Socket connection = new Socket(serverIP,9874);
 			ObjectOutputStream outStream = new ObjectOutputStream(connection.getOutputStream());
 			ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());
 			outStream.writeObject(message);

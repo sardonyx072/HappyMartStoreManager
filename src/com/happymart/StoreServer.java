@@ -21,7 +21,7 @@ public class StoreServer implements Runnable {
 	public StoreServer (Store storeInfo) {
 		this.storeInfo = storeInfo;
 		try {
-			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileSystemPath+"\\storeback.hmsb"));
+			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileSystemPath+"\\back.hmsb"));
 			this.backroom = (StoreBackroom)inStream.readObject();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -105,7 +105,9 @@ public class StoreServer implements Runnable {
 	@Override
 	public void run () {
 		try {
-			ServerSocket server = new ServerSocket(9876);
+			ServerSocket server = new ServerSocket(9874);
+			server.getReuseAddress();
+			System.out.println(server.getInetAddress() + ":" + server.getLocalPort());
 			while (true) {
 				Socket connection = server.accept();
 				ObjectInputStream inStream = new ObjectInputStream(connection.getInputStream());
