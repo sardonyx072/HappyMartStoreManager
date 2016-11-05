@@ -12,7 +12,8 @@ public class Employee implements Serializable {
 	private String password;
 	
 	public Employee(String firstName, String middleName, String lastName){
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.firstName = firstName;
 		this.middleName = middleName;
 		this.lastName = lastName;

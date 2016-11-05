@@ -15,7 +15,8 @@ public class StoreTerminal implements Runnable {
 	protected Scanner scan;
 	
 	public StoreTerminal (Store storeInfo, String serverIP) {
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.storeInfo = storeInfo;
 		this.serverIP = serverIP;
 		this.scan = new Scanner(System.in);
@@ -24,6 +25,7 @@ public class StoreTerminal implements Runnable {
 	protected boolean openSession (String employee) {
 		if (this.openSession == null) {
 			this.openSession = new Session(this.storeInfo.getID(),this.id,employee);
+			System.out.println("session id: " + this.openSession.getID());
 			return true;
 		}
 		else {
@@ -112,6 +114,7 @@ public class StoreTerminal implements Runnable {
 				switch (opt1) {
 				case 0:
 					this.sendCommand(new Message<Session>(MessageType.CloseSession,this.openSession));
+					optLevel = 0;
 					break;
 				case 1:
 					System.out.println(this.sendCommand(new Message<String>(MessageType.GetInventory,"")));

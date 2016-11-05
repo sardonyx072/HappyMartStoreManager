@@ -19,7 +19,8 @@ public class Transaction extends Activity {
 	
 	public Transaction (long[] referencedIDs, String storeInfo, long registerID, String employee, Map<ItemType,Integer> purchasedItems, Map<ItemType,Integer> returnedItems, PaymentType type, String paymentString) {
 		super(ActivityType.Transaction,"Transaction");
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.referencedTransactionIDs = referencedIDs;
 		this.storeInfo = storeInfo;
 		this.registerID = registerID;

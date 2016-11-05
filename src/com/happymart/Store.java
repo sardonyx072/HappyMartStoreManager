@@ -13,7 +13,8 @@ public class Store implements Serializable {
 	private Map<Long,Employee> employees;
 	
 	public Store (String address, String phone) {
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.address = address;
 		this.phone = phone;
 		this.employees = new HashMap<Long,Employee>();

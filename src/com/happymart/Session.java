@@ -16,7 +16,8 @@ public class Session implements Serializable {
 	private Date sessionCloseTimestamp;
 	
 	public Session (long storeID, long registerID, String employee) {
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.sessionOpenTimestamp = new Date();
 		this.storeID = storeID;
 		this.registerID = registerID;
@@ -59,6 +60,6 @@ public class Session implements Serializable {
 	}
 	public String toString() {
 		//TODO: printout
-		return null;
+		return "empty";
 	}
 }

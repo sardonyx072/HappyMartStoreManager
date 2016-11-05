@@ -12,7 +12,8 @@ public class ItemType implements Serializable {
 	private int pricePerUnitInUSCents;
 	
 	public ItemType (String name, String unitName, String originalManufacturerOrSupplierName, String description, int pricePerUnitInUSCents) {
-		this.id = uniqueIDs++;
+		//this.id = uniqueIDs++;
+		this.id = (int)(Math.random()*Integer.MAX_VALUE);
 		this.name = name;
 		this.unitName = unitName;
 		this.originalManufacturerOrSupplierName = originalManufacturerOrSupplierName;

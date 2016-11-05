@@ -13,7 +13,7 @@ public class StoreRegister extends StoreTerminal {
 		int optLevel = 0;
 		String[] opts0 = {"EXIT","log in"};
 		int opt0 = 0;
-		String[] opts1 = {"log out","check inventory","add item to checkout","remove item from checkout","add item to return","clear","manage drawer"};
+		String[] opts1 = {"log out","check inventory"};
 		int opt1 = 0;
 		do {
 			switch (optLevel) {
@@ -35,6 +35,7 @@ public class StoreRegister extends StoreTerminal {
 				switch (opt1) {
 				case 0:
 					this.sendCommand(new Message<Session>(MessageType.CloseSession,this.openSession));
+					optLevel = 0;
 					break;
 				case 1:
 					System.out.println(this.sendCommand(new Message<String>(MessageType.GetInventory,"")));
