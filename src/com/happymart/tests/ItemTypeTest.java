@@ -19,12 +19,6 @@ public class ItemTypeTest {
 	}
 
 	@Test
-	public void testGetID() {
-		ItemType test=new ItemType("bread","unit","general mills","food",122);
-		assertEquals(test.getID(),2);
-	}
-
-	@Test
 	public void testGetName() {
 		ItemType test=new ItemType("bread","unit","general mills","food",122);
 		assertEquals(test.getName(),"bread");

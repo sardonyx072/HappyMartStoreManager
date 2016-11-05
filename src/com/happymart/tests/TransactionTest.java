@@ -20,20 +20,6 @@ public class TransactionTest {
 	}
 
 	@Test
-	public void testGetID() {
-		Employee emp=new Employee("Tom","Elva","Edison");
-		ItemType type=new ItemType("bread","unit","general mills","food",122);
-		ItemStock stock=new ItemStock(type, 1, 0);
-		
-		HashMap<Long,ItemStock> inventory=new HashMap<Long,ItemStock>();
-		inventory.put(type.getID(), stock);
-		StoreBackroom sb=new StoreBackroom(inventory);
-		Transaction test=new Transaction(null, null, 0, emp.toString(), null, null, null, null);
-		assertEquals(test.getID(),1);
-		
-	}
-
-	@Test
 	public void testGetReferencedIDs() {
 		fail("Not yet implemented");
 	}

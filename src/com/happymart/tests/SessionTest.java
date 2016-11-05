@@ -21,14 +21,6 @@ public class SessionTest {
 	}
 
 	@Test
-	public void testGetID() {
-		Employee emp=new Employee("Tom","Elva","Edison");
-		Session test=new Session(1, 1, emp.toString() );
-		assertEquals(test.getID(),2);
-		
-	}
-
-	@Test
 	public void testGetSessionOpenTimestamp() {
 		Employee emp=new Employee("Tom","Elva","Edison");
 		Session test=new Session(1, 1, emp.toString() );

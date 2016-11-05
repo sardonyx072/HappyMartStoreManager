@@ -22,14 +22,6 @@ public class StoreTest {
 	}
 
 	@Test
-	public void testGetID() {
-		
-		Store test=new Store("summit ave", "123456");
-	
-		assertEquals(test.getID(),3);
-	}
-
-	@Test
 	public void testGetAddress() {
 		Store test=new Store("summit ave", "123456");
 		assertEquals(test.getAddress(),"summit ave");

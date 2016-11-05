@@ -19,12 +19,6 @@ public class EmployeeTest {
 	}
 
 	@Test
-	public void testGetId() {
-		Employee test=new Employee("Tom","Elva","Edison");
-	    assertEquals(test.getId(),1);
-	}
-
-	@Test
 	public void testGetFirstName() {
 		Employee test=new Employee("Tom","Elva","Edison");
 		assertEquals("Tom",test.getFirstName());
