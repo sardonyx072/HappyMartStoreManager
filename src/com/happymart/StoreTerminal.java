@@ -96,12 +96,12 @@ public class StoreTerminal implements Runnable {
 		int opt1 = 0;
 		do {
 			switch (optLevel) {
-			case 0:
+			case 0: //base
 				opt0 = getInputFromOptions("Welcome to the Happy Mart Store Manager!\nWhat would you like to do?", opts0);
 				switch (opt0) {
-				case 0:
+				case 0: //exit
 					break;
-				case 1:
+				case 1: //log in
 					this.loginLoop();
 					optLevel = 1;
 					break;
@@ -109,14 +109,14 @@ public class StoreTerminal implements Runnable {
 					System.out.println("Invalid response.");
 				}
 				break;
-			case 1:
+			case 1: //logged in
 				opt1 = getInputFromOptions("Hello, " + this.openSession.getEmployee() + ". What would you like to do?", opts1);
 				switch (opt1) {
-				case 0:
+				case 0: //log out
 					this.sendCommand(new Message<Session>(MessageType.CloseSession,this.openSession));
 					optLevel = 0;
 					break;
-				case 1:
+				case 1: //check inventory
 					System.out.println(this.sendCommand(new Message<String>(MessageType.GetInventory,"")));
 					break;
 				}
