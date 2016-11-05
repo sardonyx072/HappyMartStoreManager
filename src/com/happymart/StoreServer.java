@@ -23,7 +23,10 @@ public class StoreServer implements Runnable {
 		try {
 			ObjectInputStream inStream = new ObjectInputStream(new FileInputStream(fileSystemPath+"\\back.hmsb"));
 			this.backroom = (StoreBackroom)inStream.readObject();
-			this.backroom.add(new ItemType("Book","book","Pelican Books","",1999), 16);
+			this.backroom.add(new ItemType("Don Quixote","book","Pelican Books","",1999), 16);
+			this.backroom.add(new ItemType("Super Bro Protein Shake","shake","Bro Products Ltd.","",799), 400);
+			this.backroom.add(new ItemType("Brain in a jar","brain","Wizards, Inc.","",9995), 5);
+			this.backroom.add(new ItemType("Rice","lb","Uncle Ben's","",99), 2500);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

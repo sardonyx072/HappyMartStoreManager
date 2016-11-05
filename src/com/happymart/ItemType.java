@@ -54,6 +54,6 @@ public class ItemType implements Serializable {
 		this.pricePerUnitInUSCents = pricePerUnitInUSCents;
 	}
 	public String toString() {
-		return this.unitName + " of " + this.originalManufacturerOrSupplierName + " " + this.name + " (" + this.id + ")";
+		return this.unitName + "s of " + this.originalManufacturerOrSupplierName + " " + this.name + " (" + this.id + ")";
 	}
 }
